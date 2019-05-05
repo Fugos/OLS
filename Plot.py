@@ -6,9 +6,8 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 
-
 class Plot(FigureCanvas):
-    def __init__(self, title="", xlabel="", ylabel="", parent=None, axes_params=None, width=5, height=4, dpi=100, x=[], y=[]):
+    def __init__(self, title="", xlabel="", ylabel="", parent=None, axes_params=None, width=1, height=1, dpi=65, x=[], y=[]):
         self.name = 'plot_' + xlabel + '_' + ylabel
         self.x = np.array(x)
         self.y = np.array(y)
@@ -48,4 +47,19 @@ class Plot(FigureCanvas):
             self.draw()
         except ValueError:
             print('Woops!\nSome drawing SNAFU happened.\n')
+
+    def clear(self):
+        self.x = np.array([])
+        self.y = np.array([])
+        self.plot_data.set_xdata(self.x)
+        self.plot_data.set_ydata(self.y)
+        try:
+            self.draw()
+        except ValueError:
+            print('Woops!\nSome drawing SNAFU happened.\n')
+
+    def getData(self):
+        return np.vstack((self.x,self.y))
+
+    
 
